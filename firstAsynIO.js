@@ -1,6 +1,7 @@
 var fs = require('fs');
+var file = process.argv[2];
 
-fs.readFile(process.argv[2], readBack);
+fs.readFile(file, readBack);
 
 function readBack(err, data){
   var stringsWithoutNewline = 1;
