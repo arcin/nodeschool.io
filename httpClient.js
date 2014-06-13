@@ -6,4 +6,7 @@ http.get(url, function(res){
   res.on('data', function(data){
     console.log(data);
   });
+  res.on('error', function(err){
+    console.error(err);
+  });
 });
