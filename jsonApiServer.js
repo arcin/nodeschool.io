@@ -16,15 +16,21 @@ var server = http.createServer(function(req, res){
     return res.end("send me a get request");
   }
   res.writeHead(200, { 'Content-Type': 'application/json' });
-  var urlProperties = url.parse(req.url, true);
 
+  var urlProperties = url.parse(req.url, true);
   var parsedISODate = new Date(urlProperties.query.iso);
+  var unixTime = { unixtime: parsedISODate.getTime() };
   var parseTime = {
     hour: parsedISODate.getHours(),
     minute: parsedISODate.getMinutes(),
     second: parsedISODate.getSeconds()
   };
-  console.log(parseTime);
+  if (urlProperties.pathname === '/api/parsetime'){
+    res.end(JSON.stringify(parseTime));
+  }
+  if (urlProperties.pathname === '/api/unixtime'){
+    res.end(JSON.stringify(unixTime));
+  }
 });
 
 server.listen(port);
