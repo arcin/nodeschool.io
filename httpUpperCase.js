@@ -3,6 +3,8 @@ var http = require('http'),
     port = process.argv[2];
 
 http.createServer(function(req, res){
-
+  req.pipe(map(function(chunck){
+    return chunck.toString().upperCase;
+  }).pipe(res));
 });
 
