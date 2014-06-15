@@ -27,17 +27,19 @@ var toUnixTime = function(iso){
 
 
 var server = http.createServer(function(req, res){
-  var urlProperties = url.parse(req.url, true);
-  var iso = urlProperties.query.iso;
-  res.writeHead(200, { 'Content-Type': 'application/json' });
+  var urlProps = url.parse(req.url, true);
+  var iso = urlProps.query.iso;
 
-  if (req.method !== 'GET'){
-    return res.end("send me a get request");
+  if (urlProps.pathname === '/api/unixtime' || urlProps.pathname === '/api/parsetime'){
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+  } else {
+    res.writeHead(404);
+    res.end();
   }
-  if (urlProperties.pathname === '/api/parsetime'){
+  if (urlProps.pathname === '/api/parsetime'){
     res.end(JSON.stringify(parseTime(iso)));
   }
-  if (urlProperties.pathname === '/api/unixtime'){
+  if (urlProps.pathname === '/api/unixtime'){
     res.end(JSON.stringify(toUnixTime(iso)));
   }
 });
