@@ -63,9 +63,9 @@
     }
   }, function(err, results) {
     if (err) {
-      console.log(err);
+      return console.log(err);
     }
-    return console.log(results);
+    return console.log(results.get);
   });
 
 }).call(this);
