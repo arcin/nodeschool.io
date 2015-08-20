@@ -10,3 +10,9 @@ export function sqrt (s) {
 export function square (x) {
   return x * x;
 }
+
+export default {
+  PI: PI,
+  sqrt: sqrt,
+  square: square
+}
